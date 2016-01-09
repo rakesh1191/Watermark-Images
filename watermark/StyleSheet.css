@@ -1,0 +1,12 @@
+﻿.tdText
+{
+	font-family: Arial;
+	color: #000000;
+	font-size: 11px;
+}
+.tdMessage
+{
+	font-family: Arial;
+	color: red;
+	font-size: 10px;
+}
