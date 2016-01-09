@@ -38,9 +38,9 @@
         <td class="auto-style2">
             <asp:FileUpload ID="FileUpload1" runat="server"  multiple="multiple"/>
             <br />
-            <asp:Button ID="Button6" runat="server" Text="Upload" OnClick="Button6_Click" />
+            <asp:Button ID="Button6" runat="server" Text="Upload" OnClick="Button6_Click" class='btn btn-primary'/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:Button ID="Btn_Zip" runat="server" ForeColor="#009900" OnClick="Btn_Zip_Click" Text="Download ZIP" Visible="False" />
+            <asp:Button ID="Btn_Zip" runat="server" ForeColor="#009900" OnClick="Btn_Zip_Click" Text="Download ZIP" Visible="False"  class="btn btn-default"/>
         </td>
         <td class="auto-style2">
             </td>
@@ -49,7 +49,7 @@
         <td class="style2">
             <asp:TextBox ID="txtWaterMark" runat="server" Font-Size="Medium" Visible="False">Watermark Text</asp:TextBox>
             <asp:Button ID="Button2" runat="server" onclick="Button2_Click" 
-                Text="Add Watermark" Visible="False" />
+                Text="Add Watermark" Visible="False" class="btn btn-success" />
         </td>
         <td>
             <asp:Label ID="Label1" runat="server" Font-Bold="True" Text="Text Size"></asp:Label>
@@ -62,13 +62,14 @@
     <tr>
         <td class="style3">
             <asp:Button ID="Button3" runat="server" onclick="Button3_Click" 
-                Text="Move Right" Visible="False" />
+                Text="Move Right" Visible="False" class="btn btn-default btn-sm"/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Button ID="Button4" runat="server" onclick="Button4_Click" 
-                Text="Move Left" Visible="False" />
-            <asp:Button ID="Button5" runat="server" onclick="Button5_Click" 
-                Text="Submit Changes" Visible="False" />
+                Text="Move Left" Visible="False" class="btn btn-default btn-sm"/>
             <br />
+            <br />
+            <asp:Button ID="Button5" runat="server" onclick="Button5_Click" 
+                Text="Submit Changes" Visible="False" class="btn btn-success"/>
             <br />
             <br />
             <br />
