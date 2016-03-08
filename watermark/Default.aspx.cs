@@ -61,6 +61,7 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void Button2_Click(object sender, EventArgs e)
     {
+        try { 
         int nm = 1;
         string d = ViewState["fileName"].ToString();
         String extName = ViewState["extName"].ToString();
@@ -75,6 +76,8 @@ public partial class _Default : System.Web.UI.Page
         //MessageBox.Show(" saved.", "File Save");
         review();
         Btn_Zip.Visible = true;
+        }
+        catch (Exception ere) { }
     }
 
     public void review()
@@ -257,6 +260,7 @@ public partial class _Default : System.Web.UI.Page
 
     protected void Button6_Click(object sender, EventArgs e)
     {
+        try { 
         randomFIleName();
         int nm = 1;
         String d = ViewState["fileName"].ToString();
@@ -281,8 +285,17 @@ public partial class _Default : System.Web.UI.Page
         Button3.Visible = true;
         Button4.Visible = true;
         Button5.Visible = true;
+            
+            //clear previous image
+            Image1.ImageUrl = "";
 
 
+        }
+        catch (Exception ew) {
+            //System.Web.HttpContext.Current.Response.Write("<SCRIPT LANGUAGE=""JavaScript"">alert("Hello this is an Alert")</SCRIPT>");            
+            string script = "alert(\"Upload File!!\");";
+            ScriptManager.RegisterStartupScript(this, GetType(),"ServerControlScript", script, true);
+        }
     }
     protected void Btn_Zip_Click(object sender, EventArgs e)
     {
