@@ -20,10 +20,10 @@ using System.Windows.Forms;
 
 public partial class _Default : System.Web.UI.Page
 {
-    
+
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!IsPostBack)
+        if (!IsPostBack)
         {
             try
             {
@@ -33,18 +33,19 @@ public partial class _Default : System.Web.UI.Page
                 foreach (string file in Directory.EnumerateFiles(path, "*.jpg"))
                 {
                     File.Delete(file);
-                    
+
                 }
                 foreach (string file in Directory.EnumerateFiles(saveurl, "*.jpg"))
                 {
                     File.Delete(file);
                 }
-            }catch(Exception r){}
+            }
+            catch (Exception r) { }
         }
 
     }
     PictureBox picContainer = new PictureBox();
-   
+
     System.Drawing.Image img;
     ImageCodecInfo myImageCodecInfo;
     System.Drawing.Imaging.Encoder myEncoder;
@@ -52,21 +53,22 @@ public partial class _Default : System.Web.UI.Page
     EncoderParameters myEncoderParameters;
     System.Drawing.Color myWatermarkColor;
     System.Drawing.Font myFont;
-     
+
     protected void Button1_Click(object sender, EventArgs e)
     {
-        
-    
-        }
+
+
+    }
     protected void Button2_Click(object sender, EventArgs e)
     {
         int nm = 1;
         string d = ViewState["fileName"].ToString();
-        string path = Server.MapPath("~/input/"+d);
-        foreach (string file in Directory.EnumerateFiles(path, "*.jpg"))
+        String extName = ViewState["extName"].ToString();
+        string path = Server.MapPath("~/input/" + d);
+        foreach (string file in Directory.EnumerateFiles(path, "*." + extName))
         {
-            
-            watermark(file,nm);
+
+            watermark(file, nm);
             nm++;
 
         }
@@ -77,22 +79,27 @@ public partial class _Default : System.Web.UI.Page
 
     public void review()
     {
+        String extName = ViewState["extName"].ToString();
         string d = ViewState["fileName"].ToString();
-        Image1.ImageUrl ="~/Converted/"+d+"/1.jpg";          
+        Image1.ImageUrl = "~/Converted/" + d + "/1." + extName;
 
-        
+
     }
 
-    public void watermark(string flnm,int nm1)
+    public void watermark(string flnm, int nm1)
     {
+        String extName = ViewState["extName"].ToString();
         string d = ViewState["fileName"].ToString();
         Directory.CreateDirectory(Server.MapPath("~/Converted/") + d);
         int fntsize = 30;
         try
         {
             fntsize = Convert.ToInt32(TextBox1.Text);
-        }catch(Exception e){}finally{
-            
+        }
+        catch (Exception e) { }
+        finally
+        {
+
         }
         //int nm = 1;
         string name = nm1.ToString();
@@ -127,8 +134,8 @@ public partial class _Default : System.Web.UI.Page
         // top of the image
         ////if (optTop.Checked == true)
         ////{
-        X = (int)(picContainer.Image.Width/4);
-        Y = (int)(picContainer.Image.Height/8);
+        X = (int)(picContainer.Image.Width / 4);
+        Y = (int)(picContainer.Image.Height / 8);
         ////    X = 5;
         ////    Y = 300;
         ////   new Point((control.Width / 2) - (image.Width /2),(control.Height / 2) - (image.Height / 2));
@@ -138,11 +145,11 @@ public partial class _Default : System.Web.UI.Page
         ////    X = (int)(picContainer.Image.Width - sz.Width) / 2;
         ////    Y = (int)(picContainer.Image.Height - sz.Height);
         ////}
-       // Point p = new Point(100, 20);
+        // Point p = new Point(100, 20);
         Point p = new Point(X, Y);
         //p.Offset(34, 200);
         // draw the water mark text
-        
+
         //
         //centre  X = (int)(picContainer.Image.Width/5); Y = (int)(picContainer.Image.Height / 2);
         //curve X = (int)(picContainer.Image.Width/3);  Y = (int)(picContainer.Image.Height / 9); g.RotateTransform(45);
@@ -154,7 +161,7 @@ public partial class _Default : System.Web.UI.Page
         g.RotateTransform(35);
         g.DrawString(txtWaterMark.Text, f, myBrush, p);
 
-      
+
 
 
         ////////////////////////////////////////////////////////////////////
@@ -186,16 +193,16 @@ public partial class _Default : System.Web.UI.Page
         ////    }
         ////    else
         ////    {
-        string saveurl = Server.MapPath("~/Converted/"+d+"/");
+        string saveurl = Server.MapPath("~/Converted/" + d + "/");
         //save the file with the name supplied by the user
-        picContainer.Image.Save(saveurl+ name+".jpg");
+        picContainer.Image.Save(saveurl + name + "." + extName);
         ////}
         picContainer.Dispose();
         //update the current image file to point to the newly saved
         //image
         ////CurrentFile = SaveFileDialog1.FileName;
         ////this.Text = "Watermark Utility: " + CurrentFile;
-       // MessageBox.Show(CurrentFile.ToString() + " saved.", "File Save");
+        // MessageBox.Show(CurrentFile.ToString() + " saved.", "File Save");
         ////    }
         ////    else
         ////    {
@@ -206,21 +213,22 @@ public partial class _Default : System.Web.UI.Page
         //{
         //    MessageBox.Show(ex.Message.ToString(), "Image Save Error");
         //}
-       
+
     }
     protected void Button3_Click(object sender, EventArgs e)
     {
         string oldmark = txtWaterMark.Text;
-        string newmark = " "+oldmark;
+        string newmark = " " + oldmark;
         txtWaterMark.Text = newmark.ToString();
-        
+
     }
     protected void Button5_Click(object sender, EventArgs e)
     {
+        String extName = ViewState["extName"].ToString();
         int nm = 1;
         string d = ViewState["fileName"].ToString();
-        string path = Server.MapPath("~/input/"+d);
-        foreach (string file in Directory.EnumerateFiles(path, "*.jpg"))
+        string path = Server.MapPath("~/input/" + d);
+        foreach (string file in Directory.EnumerateFiles(path, "*." + extName))
         {
 
             watermark(file, nm);
@@ -236,7 +244,7 @@ public partial class _Default : System.Web.UI.Page
         string oldmark = txtWaterMark.Text;
         newmark1 = oldmark.Remove(1, 1);
         txtWaterMark.Text = newmark1.ToString();
-        
+
     }
     protected void randomFIleName()
     {
@@ -251,17 +259,19 @@ public partial class _Default : System.Web.UI.Page
     {
         randomFIleName();
         int nm = 1;
-        string d = ViewState["fileName"].ToString();
-        
+        String d = ViewState["fileName"].ToString();
+        String[] extnm = FileUpload1.FileName.Split('.');
+        String h = extnm[1];
+        ViewState["extName"] = h;
         if (FileUpload1.HasFile)
         {
-            Directory.CreateDirectory(Server.MapPath("~/input/") +d);
+            Directory.CreateDirectory(Server.MapPath("~/input/") + d);
             //foreach (HttpPostedFile uploadedFile in FileUpload1.PostedFiles)
             //{
             // Directory.CreateDirectory(Server.MapPath("~/input/")+uploadedFile.FileName);
             // uploadedFile.SaveAs(System.IO.Path.Combine(Server.MapPath("~/input/"+d),uploadedFile.FileName)); 
             //}
-            FileUpload1.SaveAs(System.IO.Path.Combine(Server.MapPath("~/input/"+d),FileUpload1.FileName));
+            FileUpload1.SaveAs(System.IO.Path.Combine(Server.MapPath("~/input/" + d), FileUpload1.FileName));
 
         }
 
@@ -271,22 +281,22 @@ public partial class _Default : System.Web.UI.Page
         Button3.Visible = true;
         Button4.Visible = true;
         Button5.Visible = true;
-        
-       
+
+
     }
     protected void Btn_Zip_Click(object sender, EventArgs e)
     {
         string d = ViewState["fileName"].ToString();
         try
         {
-            string pathname = Server.MapPath("~/Converted/"+d);
+            string pathname = Server.MapPath("~/Converted/" + d);
             string[] filename = Directory.GetFiles(pathname);
             using (ZipFile zip = new ZipFile())
             {
                 zip.AddFiles(filename, "file");
-               // zip.Save(Server.MapPath("~/Converted/watermarked.zip"));
+                // zip.Save(Server.MapPath("~/Converted/watermarked.zip"));
                 Response.ContentType = "application/zip";
-                Response.AddHeader("content-disposition", "attachment; filename=" + "watermarked.zip"); 
+                Response.AddHeader("content-disposition", "attachment; filename=" + "watermarked.zip");
                 zip.Save(Response.OutputStream);
                 Response.End();
                 // lbltxt.Text = "Zip File Created";
@@ -297,6 +307,6 @@ public partial class _Default : System.Web.UI.Page
             //lbltxt.Text = ex.Message;
         }
 
-       
+
     }
 }
